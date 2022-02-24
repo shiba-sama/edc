@@ -3,7 +3,8 @@ import { typeName } from './typing.ts'
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Sequences
 
-function * naturals(max=0) {
+function naturals(max: number): Generator<number, any, number>
+function * naturals(max = 0) {
    if (!Number.isSafeInteger(max) || max < 0) throw Error(
       `<max> :: ${max} must be natural but received type ${typeName(max)}.`
    )
@@ -11,10 +12,19 @@ function * naturals(max=0) {
    while (n < max) yield n++
 }
  
-function * range(上:number, 下:number) {
-   if (!Number.isSafeInteger(上) || !Number.isSafeInteger(下) || 上 === 下) {
-      throw Error(`Inputs ${上} and ${下} must be different integers.`)
-   }
-   if (上 < 下) while (上 <= 下) yield 上++
-   else while (下 <= 上) yield 上--
+function range(min:number, max:number): Generator<number, void, number>
+function * range(min, max) {
+   if (![min, max].every(Number.isSafeInteger) || min === max ) throw Error(
+      `Inputs ${min} and ${max} must be different integers.`
+   )
+   if (min < max) while (min <= max) yield min++
+   else while (max <= min) yield min--
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Export
+
+export default {
+   naturals,
+   range,
 }

@@ -61,15 +61,17 @@ export function fraction(float:number, denMax:number) {
 
 /** Consumes two safe integers and returns their greatest common divisor. */
 const gcd2 = (a:number, b:number) => {
-   if (!Number.isSafeInteger(b)) throw Error(`${a}, ${b} must be safe integers.`)
    while (b !== 0) [a, b] = [b, a % b]
    return a
 }
 
-const gcd = (ints:number[]) => ints.reduce(gcd2)
+export const gcd = (...ints:number[]) => {
+   if (!ints.every(Number.isSafeInteger)) throw Error(`Only safe integers allowed.`)
+   return ints.reduce(gcd2)
+}
 
 /** Consumes two `BigInt` and returns their greatest common divisor. */
-const gcd2_bigint = (a:bigint, b:bigint) => {
+const gcd2_big = (a:bigint, b:bigint) => {
    while (b !== 0n) [a, b] = [b, a % b]
    return a
 }
@@ -77,7 +79,15 @@ const gcd2_bigint = (a:bigint, b:bigint) => {
 /**
  * Greatest common divisor (GCD) for `BigInt`.
  */
-const gcd_bigint = (bigints: bigint[]) => bigints.reduce(gcd2_bigint)
+export const gcd_big = (bigints: bigint[]) => bigints.reduce(gcd2_big)
+
+function GCD(...ints:number[]): number
+function GCD(...ints:bigint[]): bigint
+function GCD(...ints:unknown[]): unknown {
+   if (ints.every(int => typeof int === 'bigint')) return (ints as bigint[]).reduce(gcd2_big)
+   if (ints.every(Number.isSafeInteger)) return (ints as number[]).reduce(gcd2)
+   throw Error(`Only safe integers allowed.`)
+}
 
 /**
  * Simplifies a fraction with an **integer** numerator `num` and divisor 
@@ -86,7 +96,7 @@ const gcd_bigint = (bigints: bigint[]) => bigints.reduce(gcd2_bigint)
  * simplifyFraction(6/3)  // => [2, 1]
  * simplifyFraction(3/6)  // => [1, 2]
  * simplifyFraction(1/2)  // => [1, 2]
- * simplifyFraction(1/0)  // => Throws Error object.
+ * simplifyFraction(1/0)  // => throws Error object
  */
 export function simplifyFraction(num:number, div:number) {
    if (!Number.isSafeInteger(num) || !Number.isSafeInteger(div)) throw Error(

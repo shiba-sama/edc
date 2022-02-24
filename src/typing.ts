@@ -29,7 +29,9 @@ export function typeName(口) {
 
 /**
  * Reports the subclass name of an error instance.
- *  - Returns `Error` object if type of <err> is non-error.
+ * @example
+ * errorName(Error())      // => 'Error
+ * errorName(RangeError()) // => 'RangeError'
  */
 export function errorName(err: Error) {
    if (!(err instanceof Error)) throw Error(
@@ -45,7 +47,7 @@ export function errorName(err: Error) {
       URIError,
    })
 
-   for (let [k, v] of errors) if (err instanceof v) return k
+   for (const [k, v] of errors) if (err instanceof v) return k
    return 'Error'
 }
 

@@ -66,7 +66,7 @@ Object.defineProperties(Array.prototype, {
 
    add: {
       value(vec) {
-         if (this.length !== vec.length) throw RangeError('Vectors must have same length.')
+         if (this.length !== vec.length) throw Error('Vectors must have same length.')
          return this.map((n, i) => n + vec[i])
       },
    },
@@ -82,3 +82,5 @@ Object.defineProperties(Array.prototype, {
 console.log(
    [1, 2, 3].scale(3)
 )
+
+export default {}

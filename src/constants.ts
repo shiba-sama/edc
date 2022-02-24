@@ -1,16 +1,11 @@
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// Object
-
-/** Object with minimal properties. */
-export const OBJECT:object = Object.create(null)
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Characters and Strings
 
-export const newLine = '\n'
+export const line = '\n'
 export const tab     = '\t'
 
 export const comma    = ','
+export const dot      = '.'
 export const space    = ' '
 export const char     = ''
 export const alphabet = 'abcdefghijklmnopqrstuvwxyz'
@@ -34,3 +29,22 @@ export const CR = /\r/g
 export const sin = Math.sin
 export const cos = Math.cos
 export const π   = Math.PI
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Export
+
+export default {
+   line,
+   tab,
+   comma,
+   dot,
+   space,
+   char,
+   alphabet,
+   teal,
+   quotes,
+   CR,
+   sin,
+   cos,
+   π,
+}
