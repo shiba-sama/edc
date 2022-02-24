@@ -47,14 +47,8 @@ export function fraction(float:number, denMax:number) {
          if (den_a < den_b) return [num_b, den_b]
          else return [num_a, den_a]
       }
-      if (getMedian() < float) {
-         num_a = sumNum()
-         den_a = sumDen()
-      }
-      else {
-         num_b = sumNum()
-         den_b = sumDen()
-      }
+      if (getMedian() < float) [num_a, den_a] = [sumNum(), sumDen()]
+      else [num_b, den_b] = [sumNum(), sumDen()]
    }
    return den_a > denMax ? [num_b, den_b] : [num_a, den_a]
 }
