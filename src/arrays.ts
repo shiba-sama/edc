@@ -2,7 +2,7 @@
 // Array Utility
 
 /**
- * Returns a shuffled or permuted copy of `arr`.
+ * Returns a permuted copy of `arr` using the decorate-sort-undecorate pattern.
  * @example
  * shuffle([1, 2, 3, 4, 5]) // returns a shuffled copy
  */
@@ -11,6 +11,21 @@ export function shuffle(arr:unknown[]) {
       .map(value => ({ value, weight: Math.random() }))
       .sort((a, b) => a.weight - b.weight)
       .map(o => o.value)
+}
+
+/**
+ * Returns a permuted copy of `arr` using the Durstenfeld improvement on the
+ * Fischer-Yates shuffle.
+ * @example
+ * shuffleArray([1, 2, 3, 4, 5]) // returns a shuffled copy
+ */
+function shuffleArray(arr: unknown[]) {
+   const copy = arr.slice();
+   for (let i = copy.length - 1; 0 < i; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+   }
+   return copy
 }
 
 /**

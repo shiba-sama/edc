@@ -83,6 +83,44 @@ function GCD(...ints:unknown[]): unknown {
    throw Error(`Only safe integers allowed.`)
 }
 
+function gcd_binary(a:bigint, b:bigint) {
+   if (b === 0n) return a
+   let commonMultipleOfTwo = 1n
+   while ((a & 1n) === 0n && (b & 1n) === 0n) {
+      a >>= 1n
+      b >>= 1n
+      commonMultipleOfTwo <<= 1n
+   }
+   while ((a & 1n) === 0n) a >>= 1n
+   while ((b & 1n) === 0n) b >>= 1n
+   while (a !== b) {
+      if (a > b) a -= b
+      else b -= a
+      while ((a & 1n) === 0n) a >>= 1n
+      while ((b & 1n) === 0n) b >>= 1n
+   }
+   return a * commonMultipleOfTwo
+}
+
+function gcd_bin(a:bigint, b:bigint) {
+   if (a < b) [a, b] = [b, a]
+   if (b === 0n) return a
+   let commonMultipleOfTwo = 1n
+   while ((a & 1n) === 0n && (b & 1n) === 0n) {
+      a >>= 1n
+      b >>= 1n
+      commonMultipleOfTwo <<= 1n
+   }
+   while ((a & 1n) === 0n) a >>= 1n
+   while ((b & 1n) === 0n) b >>= 1n
+   while (b !== 0n) {
+      [a, b] = [b, a - b]
+      while ((b & 1n) === 0n && b > 0) b >>= 1n
+      if (a < b) [a, b] = [b, a]
+   }
+   return a * commonMultipleOfTwo
+}
+
 /**
  * Simplifies a fraction with an **integer** numerator `num` and divisor 
  * `div`. Returns a fraction as an array: [numerator, divisor].
@@ -105,4 +143,16 @@ export function simplifyFraction(num:number, div:number) {
    return [num/factor, div/factor] 
 }
 
-export const randomInts = (n:number) => window.crypto.getRandomValues(new Uint16Array(n))
+export function randomInts(n:number, bits:8|16|32): Uint8Array | Uint16Array | Uint32Array
+export function randomInts(n, bits=32) {
+   switch(bits) {
+      case 8: return window.crypto.getRandomValues(new Uint8Array(n))
+      case 16: return window.crypto.getRandomValues(new Uint16Array(n))
+      case 32: return window.crypto.getRandomValues(new Uint32Array(n))
+      default: throw Error(`Unsupported number of bits: ${bits}`) 
+   }
+}
+
+export default {
+   
+}
