@@ -51,28 +51,8 @@ const length = (v:number[]) => Math.hypot(...v)
 
 Object.defineProperties(Array.prototype, {
    last: {
-      get() { return this[this.length - 1] },
-   },
-
-   isVector: {
-      value() {
-         return this.every(x => typeName(x) === 'number')
-      },
-   },
-
-   norm: {
-      value() { return Math.hypot(...this) },
-   },
-
-   add: {
-      value(vec) {
-         if (this.length !== vec.length) throw Error('Vectors must have same length.')
-         return this.map((n, i) => n + vec[i])
-      },
-   },
-
-   scale: {
-      value(scalar) { return this.map(n => n * scalar) },
+      get() { return this.at(-1) },
+      set(v) { this[this.length - 1] = v }
    },
 })
 
