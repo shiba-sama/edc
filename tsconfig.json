@@ -16,6 +16,6 @@
       "outDir": "./public/src",
       "rootDir": "./src",
       "target": "esnext",
-
+      "lib": ["DOM", "ESNext"],
    }
 }
