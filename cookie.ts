@@ -14,6 +14,8 @@ class Cookies {
    /**
     * Obtain a map of cookies.
     * WIP: Cookie parsing has errors.
+    * @example
+    * const cookies = Cookies.get()
     */
    static get(): CookiesObject {
       const tuples = document.cookie.split(";")
