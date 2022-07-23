@@ -19,13 +19,13 @@ export function shuffle<T>(arr:T[]) {
  * @example
  * shuffleArray([1, 2, 3, 4, 5]) // returns a shuffled copy
  */
-export function shuffleArray<T>(arr: T[]) {
-   const copy = arr.slice();
-   for (let i = copy.length - 1; 0 < i; i--) {
+export function shuffleArray<T>(arr:T[]) {
+   const 品 = arr.slice();
+   for (let i = 品.length - 1; 0 < i; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [copy[i], copy[j]] = [copy[j], copy[i]];
+      [品[i], 品[j]] = [品[j], 品[i]];
    }
-   return copy
+   return 品
 }
 
 /**
