@@ -2,20 +2,20 @@
 // Array Utility
 
 /**
- * Returns a permuted copy of `arr` using the decorate-sort-undecorate pattern.
+ * Returns a randomly permuted copy of `arr` using decorate-sort-undecorate.
  * @example
  * shuffle([1, 2, 3, 4, 5]) // returns a shuffled copy
  */
 export function shuffle<T>(arr:T[]) {
-   return arr.slice()
+   return arr
       .map(value => ({ value, weight: Math.random() }))
       .sort((a, b) => a.weight - b.weight)
       .map(o => o.value)
 }
 
 /**
- * Returns a permuted copy of `arr` using the Durstenfeld improvement on the
- * Fischer-Yates shuffle.
+ * Returns a randomly permuted copy of `arr` using the Durstenfeld improvement 
+ * on the Fischer-Yates shuffle.
  * @example
  * shuffleArray([1, 2, 3, 4, 5]) // returns a shuffled copy
  */
@@ -44,4 +44,17 @@ export const powerset = <T>(arr: T[]) => Array.from(
    (_, i) => arr.filter((_, j) => 1 << j & i)
 )
 
+/** Return the `i`-th subset of `arr`. */
 export const pluckSubset = <T>(arr:T[], i:number) => arr.filter((_, j) => 1 << j & i)
+
+/**
+ * Iteratively mutates an array to yield permutations.
+ */
+export function * permute<T>(arr:T[], n = arr.length): IterableIterator<T[]> {
+   if (n <= 1) yield arr
+   else for (let i = 0; i < n; i++) {
+      yield * permute(arr, n - 1)
+      const j = n % 2 ? 0 : i;
+      [arr[n-1], arr[j]] = [arr[j], arr[n-1]]
+   }
+}
