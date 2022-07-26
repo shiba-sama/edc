@@ -6,13 +6,13 @@ import { isType, typeName } from './typing.ts'
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Core
 
-/** 
+/**
  * Converts an integer to an array of its digits.
  * @example
  * intDigits(123450)  // => [1, 2, 3, 4, 5, 0]
  * intDigits(1/0)     // => []
  */
-export const intDigits = (int:number, base=10) => 
+export const intDigits = (int:number, base=10) =>
    Number.isSafeInteger(int) || typeof int === 'bigint'
       ? int.toString(base).split('').map(digit => parseInt(digit, base))
       : []
@@ -122,7 +122,7 @@ function gcd_bin(a:bigint, b:bigint) {
 }
 
 /**
- * Simplifies a fraction with an **integer** numerator `num` and divisor 
+ * Simplifies a fraction with an **integer** numerator `num` and divisor
  * `div`. Returns a fraction as an array: [numerator, divisor].
  * @example
  * simplifyFraction(6/3)  // => [2, 1]
@@ -133,14 +133,14 @@ function gcd_bin(a:bigint, b:bigint) {
 export function simplifyFraction(num:number, div:number) {
    if (!Number.isSafeInteger(num) || !Number.isSafeInteger(div)) throw Error(
       `Arguments num:${num} and div:${div} must be safe integers.`
-   );
+   )
 
    if (div === 0) throw Error(
       `The divisor (aka denominator) of a fraction cannot be 0.`
    )
 
    const factor = gcd2(num, div)
-   return [num/factor, div/factor] 
+   return [num/factor, div/factor]
 }
 
 export function randomInts(n:number, bits:8|16|32): Uint8Array | Uint16Array | Uint32Array
@@ -149,10 +149,6 @@ export function randomInts(n, bits=32) {
       case 8: return window.crypto.getRandomValues(new Uint8Array(n))
       case 16: return window.crypto.getRandomValues(new Uint16Array(n))
       case 32: return window.crypto.getRandomValues(new Uint32Array(n))
-      default: throw Error(`Unsupported number of bits: ${bits}`) 
+      default: throw Error(`Unsupported number of bits: ${bits}`)
    }
-}
-
-export default {
-   
 }
