@@ -8,17 +8,15 @@ function * naturals(max = 0) {
    if (!Number.isSafeInteger(max) || max < 0) throw Error(
       `<max> :: ${max} must be natural but received type ${typeName(max)}.`
    )
-   let n = 0
-   while (n < max) yield n++
+   for (let i=0; i<max; i++) yield i
 }
- 
-function range(min:number, max:number): Generator<number, void, number>
-function * range(min, max) {
-   if (![min, max].every(Number.isSafeInteger) || min === max ) throw Error(
-      `Inputs ${min} and ${max} must be different integers.`
+
+function * range(一:number, 二:number) {
+   if (![一, 二].every(Number.isSafeInteger) || 一 === 二 ) throw Error(
+      `Inputs ${一} and ${二} must be different integers.`
    )
-   if (min < max) while (min <= max) yield min++
-   else while (max <= min) yield min--
+   if (一 < 二) while (一 <= 二) yield 一++
+   else while (二 <= 一) yield 一--
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
