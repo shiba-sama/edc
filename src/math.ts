@@ -6,6 +6,24 @@ import { isType, typeName } from './typing.ts'
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Core
 
+/** Returns a random integer from `[min...max]`. */
+export function randomInt(min:number, max:number) {
+   return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
+/** Returns a random float from `[min...max)`. */
+export function randomFloat(min:number, max:number) {
+   return Math.random() * (max - min) + min
+}
+
+/** Returns the factorial of a natural `n`. */
+export function factorial(n:number) {
+   let p = BigInt(1)
+   let i = BigInt(n)
+   while (1 < i--) p *= i
+   return p
+}
+
 /**
  * Converts an integer to an array of its digits.
  * @example

@@ -29,6 +29,18 @@ export function shuffleArray<T>(arr:T[]) {
 }
 
 /**
+ * Returns a randomly permuted copy of `arr` in which all elements are moved.
+ */
+export function sattoloCycle<T>(arr:T[]) {
+   const 品 = arr.slice();
+   for (let i = 品.length - 1; 0 < i; i--) {
+      const j = Math.floor(Math.random() * i);
+      [品[i], 品[j]] = [品[j], 品[i]];
+   }
+   return 品
+}
+
+/**
  * Iteratively generate the powerset of `arr`.
  * @example
  * [...powerset([1, 2])] // => [[], [1], [2], [1, 2]]
