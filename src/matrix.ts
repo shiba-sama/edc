@@ -51,7 +51,7 @@ const length = (v:number[]) => Math.hypot(...v)
 
 Object.defineProperties(Array.prototype, {
    last: {
-      get() { return this.at(-1) },
+      get() { return this[this.length - 1] },
       set(v) { this[this.length - 1] = v }
    },
 })

@@ -19,8 +19,7 @@ export function randomFloat(min:number, max:number) {
 /** Returns the factorial of a natural `n`. */
 export function factorial(n:number) {
    let p = BigInt(1)
-   let i = BigInt(n)
-   while (1 < i--) p *= i
+   for (let i = BigInt(n); i > 0; i--) p *= i
    return p
 }
 

@@ -61,9 +61,15 @@ export const pluckSubset = <T>(arr:T[], i:number) => arr.filter((_, j) => 1 << j
 
 /**
  * Iteratively mutates an array to yield permutations.
+ * @example
+ * const arr = [ 1, 2, 3]
+ * let p = permutations(arr)
+ * p.next().value // => [ 1, 2, 3 ]
+ * p.next().value // => [ 1, 3, 2 ]
+ * p.next().value // => [ 2, 1, 3 ]
  */
 export function * permute<T>(arr:T[], n = arr.length): IterableIterator<T[]> {
-   if (n <= 1) yield arr
+   if (n <= 1) yield arr.slice()
    else for (let i = 0; i < n; i++) {
       yield * permute(arr, n - 1)
       const j = n % 2 ? 0 : i;
