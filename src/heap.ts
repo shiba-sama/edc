@@ -8,50 +8,48 @@ class Node<T> {
 }
 
 // —————————————————————————————————————————————————————————————————————————————
-// Pairing Heap
+// Binary Heap
 
-class PairingHeap<T> {
-   root: Node<T>|undefined = undefined
-   size: number = 0
-   #λ: (a:T, b:T) => boolean
+export default class BinaryHeap<T> {
+   品: T[] = [0 as unknown as T]
+   #λ: (一:T, 二:T) => boolean
 
-   constructor(λ = (a:T, b:T) => a < b) { this.#λ = λ }
+   get top(): T | undefined { return this.品[1] }
+   get size() { return this.品.length - 1 }
+   get serialize() { return this.品.slice(1) }
 
-   get top() { return this.root && this.root.口 }
+   constructor(λ = (一:T, 二:T) => 一 < 二) { this.#λ = λ }
 
-   #merge(一:Node<T>|undefined, 二:Node<T>|undefined) {
-      if (!一) return 二
-      if (!二) return 一
-      if (this.#λ(一.口, 二.口)) {
-         一.kids.push(二)
-         return 一
-      }
-      二.kids.push(一)
-      return 二
+   #swap(一:number, 二:number) {
+      [this.品[一], this.品[二]] = [this.品[二], this.品[一]]
    }
 
-   #mergeKids(kids:Node<T>[]): Node<T>|undefined {
-      if (kids.length === 0) return undefined
-      if (kids.length === 1) return kids[0]
-      const [一, 二, ...rest] = kids
-      return this.#merge(this.#merge(一, 二), this.#mergeKids(rest))
+   #up() {
+      let i = this.size
+      while (i > 1 && this.#λ(this.品[i], this.品[i >> 1])) this.#swap(i, i >>= 1)
    }
 
-   in(口:T) {
-      this.root = this.#merge(this.root, new Node(口))
-      return ++this.size
+   #down(i = 1) {
+      const L = i << 1
+      const R = L + 1
+      let 大 = i
+      if (L <= this.size && this.#λ(this.品[L], this.品[大])) 大 = L
+      if (R <= this.size && this.#λ(this.品[R], this.品[大])) 大 = R
+      if (大 !== i) this.#swap(i, 大), this.#down(大)
    }
+
+   in(口:T) { this.品.push(口), this.#up() }
 
    out() {
-      if (!this.root) return undefined
-      const top = this.root.口
-      this.root = this.#mergeKids(this.root.kids)
-      this.size--
+      if (this.size === 0) return undefined
+      if (this.size === 1) return this.品.pop()
+      const top = this.top
+      this.品[1] = this.品.pop()!
+      this.#down()
       return top
    }
+
+   *iter(): IterableIterator<T> {
+      for (let i = this.size; 0 < i; i--) yield this.out()!
+   }
 }
-
-// —————————————————————————————————————————————————————————————————————————————
-// Export
-
-export default PairingHeap
