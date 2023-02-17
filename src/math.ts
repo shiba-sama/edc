@@ -160,6 +160,9 @@ export function simplifyFraction(num:number, div:number) {
    return [num/factor, div/factor]
 }
 
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Random
+
 export function randomInts(n:number, bits:8|16|32): Uint8Array | Uint16Array | Uint32Array
 export function randomInts(n, bits=32) {
    switch(bits) {
