@@ -1,13 +1,23 @@
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Characters and Strings
 
-export const line     = "\n"
-export const tab      = "\t"
-export const comma    = ","
-export const dot      = "."
-export const space    = " "
-export const char     = ""
-export const alphabet = "abcdefghijklmnopqrstuvwxyz"
+export const line      = "\n"
+export const tab       = "\t"
+export const comma     = ","
+export const semicolon = ";"
+export const dot       = "."
+export const space     = " "
+export const char      = ""
+export const alphabet  = "abcdefghijklmnopqrstuvwxyz"
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Time
+
+/** Start of unix epoch. */
+export const epoch = "Thu, 01 Jan 1970 00:00:00 GMT"
+export const minute = 60
+export const hour = 3600
+export const day = 86400
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Color
