@@ -1,7 +1,7 @@
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Imports
 
-
+import { line } from "./constants.ts"
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Functions
@@ -58,9 +58,7 @@ export const TSV_into_rows = (tsv:string) => tsv
  * @example
  * const response = await Promise.race[fetch(url), delay(2000, 'TIMEOUT')]
  */
-export function delay<T>(ms:number, msg:T):Promise<T>
-export function delay(ms?:number):Promise<undefined>
-export function delay(ms:number=1000, msg=undefined) {
+export function delay<T>(ms:number=1000, msg?:T):Promise<T> {
    return new Promise(yes => setTimeout(yes, ms, msg))
 }
 
@@ -75,6 +73,15 @@ export function log<T>(msg:T): T {
    console.log(msg)
    return msg
 }
+
+type JSON_dict = Record<string, string|number|bigint|boolean>
+/**
+ * Converts a JSON dictionary into CSV.
+ */
+export const json_to_csv = (json:JSON_dict) => 
+   Object.entries(json)
+      .map(([key, val]) => `${key}\t${val}`)
+      .join(line)
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Export

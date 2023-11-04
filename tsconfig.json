@@ -17,5 +17,8 @@
       "rootDir": "./src",
       "target": "esnext",
       "lib": ["DOM", "ESNext"],
-   }
+      "paths": {
+         "~/*": ["./src/*"]
+      },
+   },
 }
