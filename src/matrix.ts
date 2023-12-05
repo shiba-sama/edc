@@ -44,7 +44,17 @@ declare global {
 
 const isVec = (v:number[]) => v.every(n => typeName(n) === 'number')
 const isMat = (m:number[][]) => m.every(isVec)
-const length = (v:number[]) => Math.hypot(...v)
+const norm = (v:number[]) => Math.hypot(...v)
+
+/** Paths from a given point in a grid or matrix. */
+export function* getPaths(x:number, y:number, max:number) {
+  const directions = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, 1], [1, -1], [-1, -1]]
+  for (const [Δx, Δy] of directions) {
+    const [xF, yF] = [x + Δx, y + Δy]
+    if (max < xF || xF < 0 || max < yF || yF < 0) continue
+    yield [xF, yF] as const
+  }
+}
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Core

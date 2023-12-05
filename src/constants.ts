@@ -25,14 +25,6 @@ export const day = 86400
 export const teal = "\x1b[36m%s\x1b[0m"
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// Regular Expressions
-
-export const quotes = /[""]+/g
-export const letter = /^[a-z]$/i
-export const word = /^[a-z]+$/i
-export const CR = /\r/g // Global match for Windows "carriage return" character.
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Math
 
 export const sin = Math.sin
