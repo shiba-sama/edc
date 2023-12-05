@@ -159,3 +159,7 @@ export function simplifyFraction(num:number, div:number) {
    const factor = gcd2(num, div)
    return [num/factor, div/factor]
 }
+
+function digits(n) {
+   return Array.from({length: Math.log10(n) + 1}).map((_, i) => Math.trunc(n / 10**i) % 10)
+}

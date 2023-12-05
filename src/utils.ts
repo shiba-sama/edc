@@ -6,7 +6,9 @@ import { line } from "./constants.ts"
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Functions
 
-type value = string|number|bigint|boolean
+/** Primitives allowed in JSON excluding objects or arrays. */
+type primitive = string|number|bigint|boolean
+type json_dict = Record<string, primitive>
 
 /**
  * For creating PostgreSQL tuples. Requires arrays with any mixture of 
@@ -14,7 +16,7 @@ type value = string|number|bigint|boolean
  * @example
  * parens([1, 2, 3])  // → '(1, 2, 3)'
  */
-export const parens = (arr: value[]) => '('.concat(arr.join(','), ')')
+export const parens = (arr: primitive[]) => '('.concat(arr.join(','), ')')
 
 /**
  * Surrounds a `string`, `number` or `bigint` with a layer of single 
@@ -74,11 +76,10 @@ export function log<T>(msg:T): T {
    return msg
 }
 
-type JSON_dict = Record<string, string|number|bigint|boolean>
 /**
  * Converts a JSON dictionary into CSV.
  */
-export const json_to_csv = (json:JSON_dict) => 
+export const json_to_csv = (json:json_dict) => 
    Object.entries(json)
       .map(([key, val]) => `${key}\t${val}`)
       .join(line)
